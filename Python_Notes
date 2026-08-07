@@ -1,0 +1,224 @@
+# Day 1 – Python Fundamentals
+
+## 1. Python Introduction
+
+### What is Python?
+Python is a **high-level, general-purpose, interpreted programming language** known for its readability and extensive standard library.
+
+### Who created Python?
+- Created by **Guido van Rossum** (1989)
+- First released in **1991**
+- Design philosophy: *"Code is read more often than it is written."*
+
+### Programming Language
+A programming language is a formal language used to write instructions that are translated into machine instructions by a **compiler** or an **interpreter**.
+
+---
+
+## 2. Python Execution Model
+
+```
+Source Code
+     │
+     ▼
+Python Interpreter
+     │
+     ▼
+Lexical Analysis (Tokenization)
+     │
+     ▼
+Parsing (Syntax Check)
+     │
+     ▼
+Compilation to Bytecode (.pyc)
+     │
+     ▼
+Python Virtual Machine (PVM)
+     │
+     ▼
+Operating System
+     │
+     ▼
+CPU
+     │
+     ▼
+Output
+```
+
+### Key Terms
+
+**Source Code**
+- Human-readable Python code.
+
+**Interpreter**
+- Reads, compiles, and executes Python code.
+
+**Bytecode**
+- Platform-independent intermediate code executed by the PVM.
+
+### Is Python Compiled or Interpreted?
+
+Python uses **both**:
+1. Compiles source code into **bytecode**
+2. The **Python Virtual Machine (PVM)** interprets and executes the bytecode
+
+---
+
+# 3. Variables & Objects
+
+### Variable
+A variable is a **reference (name)** that points to an object.
+
+Example:
+
+```python
+x = 10
+```
+
+Python:
+1. Creates an integer object `10`
+2. Binds the name `x` to that object
+
+### Object
+
+Every Python object has:
+- Value (data)
+- Type
+- Behavior (methods)
+
+---
+
+### Mutable vs Immutable
+
+**Immutable (cannot change):**
+- int
+- float
+- bool
+- str
+- tuple
+
+**Mutable (can change):**
+- list
+- dict
+- set
+
+---
+
+# 4. Data Types
+
+### Dynamic Typing
+
+Python determines an object's type **at runtime**.
+
+---
+
+### Type Conversion
+
+**Implicit**
+- Done automatically by Python.
+
+**Explicit**
+- Performed using functions like:
+  - `int()`
+  - `float()`
+  - `str()`
+  - `bool()`
+
+---
+
+### String Methods
+
+| Method | Purpose |
+|---------|---------|
+| `upper()` | Uppercase |
+| `lower()` | Lowercase |
+| `title()` | Capitalize words |
+| `strip()` | Remove spaces |
+| `replace()` | Replace text |
+| `split()` | String → List |
+| `find()` | Find substring |
+| `count()` | Count occurrences |
+| `startswith()` | Check prefix |
+| `endswith()` | Check suffix |
+
+---
+
+### f-Strings
+
+Preferred because they are:
+- More readable
+- Faster
+- Cleaner
+- Support expressions
+
+```python
+print(f"Hello {name}")
+```
+
+---
+
+# 5. Operators & Expressions
+
+### Operator
+A symbol that performs an operation on one or more operands.
+
+Example:
+
+```python
+5 + 3
+```
+
+### Expression
+Anything Python evaluates to produce a value.
+
+Examples:
+
+```python
+5 + 3
+x > 10
+len(name)
+```
+
+---
+
+# 6. Conditional Statements
+
+Used to make decisions based on conditions.
+
+```python
+if condition:
+    ...
+elif another_condition:
+    ...
+else:
+    ...
+```
+
+### Short-Circuit Evaluation
+
+Python stops evaluating a logical expression as soon as the final result is known.
+
+Examples:
+
+- `False and ...` → second part is skipped.
+- `True or ...` → second part is skipped.
+
+Benefits:
+- Faster execution
+- Prevents unnecessary evaluations and some runtime errors
+
+---
+
+# Day 1 Summary
+
+- Python is high-level and general-purpose.
+- Python compiles to bytecode, then the PVM executes it.
+- Variables are references to objects.
+- Every object has a value, type, and behavior.
+- Objects are either mutable or immutable.
+- Python uses dynamic typing.
+- Type conversion can be implicit or explicit.
+- Methods belong to objects.
+- Expressions evaluate to values.
+- Conditional statements control program flow.
+- Short-circuit evaluation improves efficiency and safety.
