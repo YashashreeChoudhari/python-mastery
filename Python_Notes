@@ -222,3 +222,886 @@ Benefits:
 - Expressions evaluate to values.
 - Conditional statements control program flow.
 - Short-circuit evaluation improves efficiency and safety.
+
+# Day 2 — Conditions, Loops & Lists
+
+## 2.1 Conditional / Ternary Expression
+
+A ternary expression is a short way to write a simple `if-else`.
+
+### Syntax
+
+```python
+value_if_true if condition else value_if_false
+```
+
+### Example
+
+```python
+result = "Even" if x % 2 == 0 else "Odd"
+```
+
+Python syntax:
+
+```python
+A if condition else B
+```
+
+❌ Python does not use:
+
+```text
+condition ? A : B
+```
+
+---
+
+## 2.2 `match-case`
+
+`match-case` is used to compare a value against different patterns.
+
+### Syntax
+
+```python
+match expression:
+    case pattern1:
+        # code
+    case pattern2:
+        # code
+    case _:
+        # default code
+```
+
+`_` acts as the default case.
+
+---
+
+# 2.3 Loops
+
+A loop repeatedly executes a block of code based on a condition or over a sequence of values.
+
+## `for` Loop
+
+Used to iterate over an iterable and execute code for each item.
+
+### Syntax
+
+```python
+for variable in iterable:
+    # code
+```
+
+### `range()`
+
+`range()` generates a sequence of numbers.
+
+### Syntax
+
+```python
+range(stop)
+range(start, stop)
+range(start, stop, step)
+```
+
+Example:
+
+```python
+for i in range(1, 6):
+    print(i)
+```
+
+Output:
+
+```text
+1
+2
+3
+4
+5
+```
+
+> `stop` is excluded.
+
+---
+
+## Loop Control
+
+### 1. `break`
+
+Immediately terminates the loop.
+
+```python
+for i in range(10):
+    if i == 5:
+        break
+    print(i)
+```
+
+Output:
+
+```text
+0
+1
+2
+3
+4
+```
+
+**Remember:** `break` → stop the entire loop.
+
+---
+
+### 2. `continue`
+
+Skips the current iteration and moves to the next iteration.
+
+```python
+for i in range(5):
+    if i == 2:
+        continue
+    print(i)
+```
+
+Output:
+
+```text
+0
+1
+3
+4
+```
+
+**Remember:** `continue` → skip the current iteration.
+
+---
+
+### 3. `pass`
+
+`pass` does nothing. It is used as a placeholder when Python requires a statement.
+
+```python
+for i in range(5):
+    if i == 2:
+        pass
+    print(i)
+```
+
+Output:
+
+```text
+0
+1
+2
+3
+4
+```
+
+**Remember:**
+
+```text
+break     → stop loop
+continue  → skip iteration
+pass      → do nothing
+```
+
+---
+
+# 2.4 `while` Loop
+
+A `while` loop repeatedly executes code as long as a condition is `True`.
+
+### Syntax
+
+```python
+while condition:
+    # code
+```
+
+### Example
+
+```python
+x = 5
+
+while x > 0:
+    print(x)
+    x -= 1
+```
+
+Output:
+
+```text
+5
+4
+3
+2
+1
+```
+
+### Important
+
+The condition must eventually become `False`, otherwise the loop can become an **infinite loop**.
+
+---
+
+## `for` vs `while`
+
+| `for`                                | `while`                                      |
+| ------------------------------------ | -------------------------------------------- |
+| Iterates over an iterable            | Runs while a condition is `True`             |
+| Often used when iterations are known | Useful when iterations depend on a condition |
+| `for x in range(5)`                  | `while x < 5`                                |
+
+---
+
+# 2.5 Nested Loops
+
+A loop inside another loop is called a **nested loop**.
+
+```python
+for i in range(3):
+    for j in range(2):
+        print(i, j)
+```
+
+Output:
+
+```text
+0 0
+0 1
+1 0
+1 1
+2 0
+2 1
+```
+
+The inner loop completes all its iterations for every iteration of the outer loop.
+
+---
+
+# 2.6 Lists
+
+A **list** is an ordered, mutable collection of objects.
+
+```python
+data = [10, "Python", 3.5, True]
+```
+
+### Key Properties
+
+* **Ordered** → elements have positions.
+* **Mutable** → elements can be changed.
+* **Allows duplicates**.
+* **Can contain different data types**.
+
+---
+
+## List Indexing
+
+Python uses **zero-based indexing**, just like strings.
+
+```text
+Index:   0    1    2    3
+Value:  10   20   30   40
+```
+
+```python
+a[0]   # 10
+a[2]   # 30
+```
+
+### Negative Indexing
+
+```text
+Index:  -4   -3   -2   -1
+Value:  10   20   30   40
+```
+
+```python
+a[-1]  # 40
+a[-2]  # 30
+```
+
+---
+
+# 2.7 List Slicing
+
+Slicing extracts multiple elements from a list.
+
+### Syntax
+
+```python
+list[start:stop:step]
+```
+
+Example:
+
+```python
+a = [10, 20, 30, 40, 50]
+
+a[1:4]
+```
+
+Output:
+
+```text
+[20, 30, 40]
+```
+
+> `stop` is excluded.
+
+### Common patterns
+
+```python
+a[:]       # entire list
+a[1:]      # from index 1 to end
+a[:3]      # beginning to index 2
+a[::2]     # every second element
+a[::-1]    # reverse the list
+```
+
+Important distinction:
+
+```python
+a[-1]      # negative indexing → last element
+a[::-1]    # negative step → reverse list
+```
+
+---
+
+# 2.8 Modifying Lists
+
+Lists are mutable, so their elements can be changed.
+
+```python
+a = [10, 20, 30]
+
+a[1] = 99
+
+print(a)
+```
+
+Output:
+
+```text
+[10, 99, 30]
+```
+
+Assignment to an index **replaces** the existing element.
+
+---
+
+# 2.9 Adding & Removing Elements
+
+## `append()`
+
+Adds one element to the end.
+
+```python
+a = [1, 2, 3]
+a.append(4)
+
+print(a)
+```
+
+Output:
+
+```text
+[1, 2, 3, 4]
+```
+
+---
+
+## `insert()`
+
+Adds an element at a specific index.
+
+```python
+a = [1, 2, 3]
+a.insert(1, 10)
+
+print(a)
+```
+
+Output:
+
+```text
+[1, 10, 2, 3]
+```
+
+Existing elements are shifted.
+
+---
+
+## `remove()`
+
+Removes the **first matching value**.
+
+```python
+a = [1, 2, 3, 2]
+
+a.remove(2)
+
+print(a)
+```
+
+Output:
+
+```text
+[1, 3, 2]
+```
+
+---
+
+## `pop()`
+
+Removes and returns an element.
+
+```python
+a = [10, 20, 30]
+
+x = a.pop()
+
+print(x)
+print(a)
+```
+
+Output:
+
+```text
+30
+[10, 20]
+```
+
+By default, `pop()` removes the last element.
+
+You can specify an index:
+
+```python
+a.pop(0)
+```
+
+---
+
+## `del`
+
+`del` is a Python statement, not a list method.
+
+```python
+a = [10, 20, 30]
+
+del a[1]
+
+print(a)
+```
+
+Output:
+
+```text
+[10, 30]
+```
+
+### Quick Reference
+
+| Operation      | Purpose                              |
+| -------------- | ------------------------------------ |
+| `append(x)`    | Add `x` at the end                   |
+| `insert(i, x)` | Add `x` at index `i`                 |
+| `remove(x)`    | Remove first matching `x`            |
+| `pop()`        | Remove & return last element         |
+| `pop(i)`       | Remove & return element at index `i` |
+| `del a[i]`     | Delete element at index `i`          |
+
+---
+
+# 2.10 `append()` vs `extend()`
+
+### `append()`
+
+Adds the argument as **one element**.
+
+```python
+a = [1, 2]
+
+a.append([3, 4])
+
+print(a)
+```
+
+Output:
+
+```text
+[1, 2, [3, 4]]
+```
+
+### `extend()`
+
+Adds the elements from an iterable individually.
+
+```python
+a = [1, 2]
+
+a.extend([3, 4])
+
+print(a)
+```
+
+Output:
+
+```text
+[1, 2, 3, 4]
+```
+
+### Difference
+
+```text
+append([3, 4]) → adds [3, 4] as ONE element
+extend([3, 4]) → adds 3 and 4 separately
+```
+
+---
+
+# 2.11 Other Important List Methods
+
+## `count()`
+
+Counts how many times a value occurs.
+
+```python
+a = [10, 20, 10, 30, 10]
+
+a.count(10)
+```
+
+Output:
+
+```text
+3
+```
+
+---
+
+## `index()`
+
+Returns the index of the first matching value.
+
+```python
+a = [10, 20, 10, 30]
+
+a.index(30)
+```
+
+Output:
+
+```text
+3
+```
+
+---
+
+## `sort()`
+
+Sorts the list in ascending order.
+
+```python
+a = [5, 2, 8, 1, 3]
+
+a.sort()
+
+print(a)
+```
+
+Output:
+
+```text
+[1, 2, 3, 5, 8]
+```
+
+Descending:
+
+```python
+a.sort(reverse=True)
+```
+
+`sort()` modifies the same list.
+
+---
+
+## `reverse()`
+
+Reverses the current order.
+
+```python
+a = [1, 2, 3, 4]
+
+a.reverse()
+
+print(a)
+```
+
+Output:
+
+```text
+[4, 3, 2, 1]
+```
+
+---
+
+## `clear()`
+
+Removes all elements.
+
+```python
+a = [1, 2, 3]
+
+a.clear()
+
+print(a)
+```
+
+Output:
+
+```text
+[]
+```
+
+---
+
+# 2.12 Nested Lists
+
+A list can contain other lists.
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+```
+
+Think of it as rows and columns:
+
+```text
+        col 0  col 1  col 2
+row 0     1      2      3
+row 1     4      5      6
+row 2     7      8      9
+```
+
+### Accessing Elements
+
+First index → selects the inner list.
+
+Second index → selects an element inside it.
+
+```python
+matrix[1][2]
+```
+
+Step by step:
+
+```text
+matrix[1]    → [4, 5, 6]
+matrix[1][2] → 6
+```
+
+### Modifying Nested Lists
+
+```python
+matrix[0][1] = 20
+```
+
+Result:
+
+```text
+[
+    [1, 20, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+```
+
+### Iterating
+
+```python
+for row in matrix:
+    for value in row:
+        print(value)
+```
+
+This uses a nested loop.
+
+---
+
+# 2.13 List References & Copying
+
+## Assignment creates another reference
+
+```python
+a = [1, 2, 3]
+b = a
+```
+
+`a` and `b` refer to the **same list object**.
+
+```python
+b[0] = 100
+
+print(a)
+print(b)
+```
+
+Output:
+
+```text
+[100, 2, 3]
+[100, 2, 3]
+```
+
+### Separate Copy
+
+```python
+a = [1, 2, 3]
+b = a.copy()
+
+b[0] = 100
+
+print(a)
+print(b)
+```
+
+Output:
+
+```text
+[1, 2, 3]
+[100, 2, 3]
+```
+
+### Remember
+
+```python
+b = a          # same object
+b = a.copy()   # separate list
+b = a[1:4]    # creates a separate list
+```
+
+---
+
+# 2.14 List Comprehensions
+
+A list comprehension is a compact way to create a list from an iterable.
+
+### Syntax
+
+```python
+[expression for variable in iterable]
+```
+
+### Normal Approach
+
+```python
+squares = []
+
+for x in range(5):
+    squares.append(x * x)
+```
+
+### List Comprehension
+
+```python
+squares = [x * x for x in range(5)]
+```
+
+Output:
+
+```text
+[0, 1, 4, 9, 16]
+```
+
+---
+
+## List Comprehension with a Condition
+
+```python
+even = [x for x in range(1, 11) if x % 2 == 0]
+```
+
+Output:
+
+```text
+[2, 4, 6, 8, 10]
+```
+
+### Transform + Filter
+
+```python
+result = [x * 2 for x in range(1, 6) if x % 2 != 0]
+```
+
+Output:
+
+```text
+[2, 6, 10]
+```
+
+Here:
+
+```text
+x * 2                 → transformation
+if x % 2 != 0         → filter
+```
+
+> Use list comprehensions for simple, readable transformations. For complicated logic, a normal `for` loop is often clearer.
+
+---
+
+# Day 2 — Key Takeaways
+
+```text
+Ternary:
+A if condition else B
+
+for:
+for x in iterable:
+
+while:
+while condition:
+
+Loop control:
+break → stop
+continue → skip
+pass → do nothing
+
+List:
+ordered + mutable + allows duplicates
+
+Indexing:
+a[0]
+a[-1]
+
+Slicing:
+a[start:stop:step]
+
+Important methods:
+append()
+insert()
+remove()
+pop()
+extend()
+count()
+index()
+sort()
+reverse()
+clear()
+
+References:
+b = a          → same object
+b = a.copy()   → separate list
+
+Comprehension:
+[expression for variable in iterable]
+```
+
+### Day 2 Status
+
+**Completed:** Conditions → loops → loop control → lists → list operations → nested lists → references/copying → comprehensions.
+
+**Moved to Day 3:** `enumerate()`, `zip()`, deeper copying concepts, common list pitfalls, and further collection practice.
