@@ -1100,8 +1100,188 @@ Comprehension:
 [expression for variable in iterable]
 ```
 
-### Day 2 Status
 
-**Completed:** Conditions → loops → loop control → lists → list operations → nested lists → references/copying → comprehensions.
 
-**Moved to Day 3:** `enumerate()`, `zip()`, deeper copying concepts, common list pitfalls, and further collection practice.
+# Day 3 — `enumerate()` and `zip()`
+
+## 1. `enumerate()`
+
+`enumerate()` is used when you need **both the index and the value** while looping through a sequence.
+
+### Example
+
+```python
+tasks = ["Learn Python", "Practice coding", "Build project"]
+
+for index, task in enumerate(tasks):
+    print(index, task)
+```
+
+### Output
+
+```text
+0 Learn Python
+1 Practice coding
+2 Build project
+```
+
+By default, the index starts at `0`.
+
+You can change the starting index:
+
+```python
+for index, task in enumerate(tasks, start=1):
+    print(index, task)
+```
+
+Output:
+
+```text
+1 Learn Python
+2 Practice coding
+3 Build project
+```
+
+### Syntax
+
+```python
+enumerate(iterable, start=0)
+```
+
+### When to use it
+
+Use `enumerate()` when you need:
+
+* The position of an element
+* The element itself
+* Both at the same time
+
+---
+
+## 2. `zip()`
+
+`zip()` is useful when you have **two or more related sequences** and want to process corresponding elements together.
+
+### Example
+
+```python
+names = ["Amit", "Rahul", "Priya"]
+scores = [85, 72, 91]
+
+for name, score in zip(names, scores):
+    print(name, score)
+```
+
+### Output
+
+```text
+Amit 85
+Rahul 72
+Priya 91
+```
+
+`zip()` pairs elements by position:
+
+```text
+Amit   → 85
+Rahul  → 72
+Priya  → 91
+```
+
+### Syntax
+
+```python
+zip(iterable1, iterable2)
+```
+
+It can also work with more than two iterables:
+
+```python
+for name, age, city in zip(names, ages, cities):
+    print(name, age, city)
+```
+
+### Important behavior
+
+If the iterables have different lengths, normal `zip()` stops when the **shortest iterable** is exhausted.
+
+Example:
+
+```python
+names = ["Amit", "Rahul", "Priya"]
+scores = [85, 72]
+
+for name, score in zip(names, scores):
+    print(name, score)
+```
+
+Output:
+
+```text
+Amit 85
+Rahul 72
+```
+
+`Priya` is not processed because there is no corresponding score.
+
+---
+
+## 3. `enumerate()` vs `zip()`
+
+### `enumerate()`
+
+Gives:
+
+```text
+index + value
+```
+
+Example:
+
+```python
+for index, name in enumerate(names):
+    print(index, name)
+```
+
+### `zip()`
+
+Gives:
+
+```text
+value + related value
+```
+
+Example:
+
+```python
+for name, score in zip(names, scores):
+    print(name, score)
+```
+
+### They can also be combined
+
+```python
+for index, (name, score) in enumerate(zip(names, scores), start=1):
+    print(index, name, score)
+```
+
+Output:
+
+```text
+1 Amit 85
+2 Rahul 72
+3 Priya 91
+```
+
+---
+
+## Key takeaway
+
+```text
+enumerate() → I need the position + value.
+
+zip()       → I need corresponding values from multiple sequences.
+```
+
+
+
