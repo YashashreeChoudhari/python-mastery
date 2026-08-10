@@ -1285,3 +1285,995 @@ zip()       → I need corresponding values from multiple sequences.
 
 
 
+
+
+# Day 4 — Tuples + Sets
+
+---
+
+# 1. Tuples
+
+A **tuple** is an **ordered, immutable collection** of elements.
+
+```python
+numbers = (10, 20, 30, 40)
+```
+
+### Key properties
+
+* Ordered → elements have a fixed position
+* Immutable → elements cannot be changed after creation
+* Allows duplicate values
+* Supports indexing and slicing
+
+---
+
+## 1.1 Tuple Indexing
+
+Tuples use the same indexing rules as lists.
+
+```python
+numbers = (10, 20, 30, 40)
+
+print(numbers[0])     # 10
+print(numbers[2])     # 30
+print(numbers[-1])    # 40
+```
+
+---
+
+## 1.2 Tuple Slicing
+
+Tuple slicing works like list slicing.
+
+```python
+numbers = (10, 20, 30, 40, 50)
+
+print(numbers[1:4])
+```
+
+Output:
+
+```text
+(20, 30, 40)
+```
+
+General syntax:
+
+```python
+tuple[start:stop:step]
+```
+
+Example:
+
+```python
+numbers[::2]
+```
+
+---
+
+## 1.3 Tuple Immutability
+
+Tuples cannot be modified after creation.
+
+```python
+numbers = (10, 20, 30)
+
+numbers[1] = 50
+```
+
+This produces an error because tuples are immutable.
+
+Compare with a list:
+
+```python
+numbers = [10, 20, 30]
+
+numbers[1] = 50
+```
+
+This is allowed because lists are mutable.
+
+---
+
+## 1.4 Single-Element Tuple
+
+A single-element tuple requires a comma.
+
+```python
+x = (10,)
+```
+
+Without the comma:
+
+```python
+x = (10)
+```
+
+`x` is an integer, not a tuple.
+
+Check:
+
+```python
+print(type((10,)))
+print(type((10)))
+```
+
+---
+
+## 1.5 Tuple Unpacking
+
+Tuple unpacking assigns tuple elements to variables.
+
+```python
+student = ("Amit", 21, 85)
+
+name, age, marks = student
+
+print(name)
+print(age)
+print(marks)
+```
+
+Output:
+
+```text
+Amit
+21
+85
+```
+
+The number of variables normally needs to match the number of tuple elements.
+
+```python
+a, b, c = (10, 20, 30)     # Correct
+```
+
+---
+
+## 1.6 Tuple Methods
+
+Because tuples are immutable, they have relatively few methods.
+
+### `count()`
+
+Counts how many times a value occurs.
+
+```python
+numbers = (10, 20, 10, 30, 10)
+
+print(numbers.count(10))
+```
+
+Output:
+
+```text
+3
+```
+
+### `index()`
+
+Returns the position of the first occurrence.
+
+```python
+numbers = (10, 20, 30, 20)
+
+print(numbers.index(20))
+```
+
+Output:
+
+```text
+1
+```
+
+---
+
+## 1.7 When to Use a Tuple
+
+Use a tuple when the data:
+
+* Has an order
+* Represents a fixed group of values
+* Should not normally be changed
+
+Example:
+
+```python
+coordinates = (18.52, 73.85)
+```
+
+```python
+product = ("Laptop", 50000, 5)
+```
+
+The important idea is:
+
+> **Use a tuple when the collection represents fixed data.**
+
+---
+
+# 2. Sets
+
+A **set** is a mutable collection of **unique elements**.
+
+```python
+numbers = {10, 20, 30, 20, 10}
+
+print(numbers)
+```
+
+The duplicates are automatically removed.
+
+Result:
+
+```text
+{10, 20, 30}
+```
+
+### Key properties
+
+* Unique elements
+* No indexing
+* No guaranteed order
+* Mutable
+* Supports mathematical set operations
+
+---
+
+## 2.1 Set vs List vs Tuple
+
+| Feature    | List | Tuple | Set |
+| ---------- | ---- | ----- | --- |
+| Ordered    | Yes  | Yes   | No  |
+| Mutable    | Yes  | No    | Yes |
+| Duplicates | Yes  | Yes   | No  |
+| Indexing   | Yes  | Yes   | No  |
+
+### Mental model
+
+```text
+List  → ordered + changeable + duplicates allowed
+
+Tuple → ordered + fixed + duplicates allowed
+
+Set   → unique values + no indexing
+```
+
+---
+
+# 3. Creating Sets
+
+```python
+numbers = {10, 20, 30}
+```
+
+### Creating an empty set
+
+Be careful:
+
+```python
+x = {}
+```
+
+This creates an **empty dictionary**, not a set.
+
+Correct:
+
+```python
+x = set()
+```
+
+---
+
+# 4. Converting a List to a Set
+
+A common use of sets is removing duplicates.
+
+```python
+numbers = [10, 20, 10, 30, 20]
+
+unique_numbers = set(numbers)
+
+print(unique_numbers)
+```
+
+Result:
+
+```text
+{10, 20, 30}
+```
+
+---
+
+# 5. Adding Elements
+
+Use `.add()`.
+
+```python
+languages = {"Python", "Java"}
+
+languages.add("C++")
+
+print(languages)
+```
+
+If the value already exists, nothing is duplicated.
+
+```python
+languages.add("Python")
+```
+
+The set still contains only one `"Python"`.
+
+---
+
+# 6. Removing Elements
+
+## `remove()`
+
+```python
+languages.remove("Java")
+```
+
+If the element does not exist, `remove()` raises an error.
+
+---
+
+## `discard()`
+
+```python
+languages.discard("Java")
+```
+
+If the element does not exist, `discard()` does nothing.
+
+### Difference
+
+```text
+remove(x)   → error if x doesn't exist
+discard(x)  → no error if x doesn't exist
+```
+
+---
+
+# 7. Membership Checking
+
+Sets are very useful for checking whether an element exists.
+
+```python
+languages = {"Python", "Java", "C++"}
+
+print("Python" in languages)
+```
+
+Output:
+
+```text
+True
+```
+
+You can also use `not in`:
+
+```python
+print("Rust" not in languages)
+```
+
+Output:
+
+```text
+True
+```
+
+Example:
+
+```python
+allowed_users = {"Amit", "Rahul", "Priya"}
+
+username = "Rahul"
+
+if username in allowed_users:
+    print("Access granted")
+```
+
+---
+
+# 8. Set Operations
+
+Given:
+
+```python
+a = {1, 2, 3, 4}
+b = {3, 4, 5, 6}
+```
+
+---
+
+## 8.1 Union `|`
+
+Union gives **all unique elements from both sets**.
+
+```python
+a | b
+```
+
+Result:
+
+```text
+{1, 2, 3, 4, 5, 6}
+```
+
+Method version:
+
+```python
+a.union(b)
+```
+
+### Mental model
+
+```text
+a | b → everything
+```
+
+---
+
+## 8.2 Intersection `&`
+
+Intersection gives elements present in **both sets**.
+
+```python
+a & b
+```
+
+Result:
+
+```text
+{3, 4}
+```
+
+Method version:
+
+```python
+a.intersection(b)
+```
+
+### Mental model
+
+```text
+a & b → common
+```
+
+---
+
+## 8.3 Difference `-`
+
+Difference gives elements present in the first set but not the second.
+
+```python
+a - b
+```
+
+Result:
+
+```text
+{1, 2}
+```
+
+The direction matters.
+
+```python
+b - a
+```
+
+Result:
+
+```text
+{5, 6}
+```
+
+Method version:
+
+```python
+a.difference(b)
+```
+
+### Mental model
+
+```text
+a - b → only a
+b - a → only b
+```
+
+---
+
+## 8.4 Symmetric Difference `^`
+
+Gives elements that are in either set, but **not in both**.
+
+```python
+a ^ b
+```
+
+Result:
+
+```text
+{1, 2, 5, 6}
+```
+
+Method version:
+
+```python
+a.symmetric_difference(b)
+```
+
+### Mental model
+
+```text
+a ^ b → different / not common
+```
+
+---
+
+# 9. Set Operators vs Methods
+
+Both forms can perform the same operation.
+
+### Union
+
+```python
+a | b
+```
+
+```python
+a.union(b)
+```
+
+### Intersection
+
+```python
+a & b
+```
+
+```python
+a.intersection(b)
+```
+
+### Difference
+
+```python
+a - b
+```
+
+```python
+a.difference(b)
+```
+
+### Symmetric Difference
+
+```python
+a ^ b
+```
+
+```python
+a.symmetric_difference(b)
+```
+
+For simple set operations, operators are concise.
+
+Methods can sometimes make the intent more explicit.
+
+---
+
+# 10. Subset and Superset
+
+Suppose:
+
+```python
+user_permissions = {"read", "create"}
+
+admin_permissions = {"read", "write", "delete", "create"}
+```
+
+### `issubset()`
+
+Checks whether **all elements of one set exist in another set**.
+
+```python
+user_permissions.issubset(admin_permissions)
+```
+
+Result:
+
+```text
+True
+```
+
+Meaning:
+
+> Every permission the user has is also available to the admin.
+
+---
+
+### `issuperset()`
+
+Checks whether one set contains all elements of another set.
+
+```python
+admin_permissions.issuperset(user_permissions)
+```
+
+Result:
+
+```text
+True
+```
+
+### Mental model
+
+```text
+A.issubset(B)
+→ Is everything in A also inside B?
+
+A.issuperset(B)
+→ Does A contain everything in B?
+```
+
+---
+
+# 11. `len()` with Sets
+
+`len()` tells us how many unique elements are in a set.
+
+```python
+numbers = {10, 20, 30, 40}
+
+print(len(numbers))
+```
+
+Output:
+
+```text
+4
+```
+
+Useful for counting unique values:
+
+```python
+numbers = [10, 20, 10, 30, 20]
+
+print(len(set(numbers)))
+```
+
+Output:
+
+```text
+3
+```
+
+---
+
+# 12. Lists + Tuples + Sets Together
+
+Real programs often combine data structures.
+
+Example:
+
+```python
+developers = [
+    ("Amit", "Backend"),
+    ("Rahul", "Frontend"),
+    ("Priya", "Backend"),
+    ("Neha", "DevOps")
+]
+
+active = {"Amit", "Priya", "Neha"}
+```
+
+We can use tuple unpacking:
+
+```python
+for name, role in developers:
+    if name in active:
+        print(name, role)
+```
+
+We can use a set to collect unique roles:
+
+```python
+roles = set()
+
+for name, role in developers:
+    if name in active:
+        roles.add(role)
+
+print(roles)
+```
+
+This combines:
+
+```text
+List
+ ↓
+Tuple
+ ↓
+Set membership
+ ↓
+Condition
+ ↓
+Set for unique results
+```
+
+This is the type of data-processing logic you should become comfortable with.
+
+---
+
+# 13. Practical Developer Patterns Covered
+
+During Day 4, we practiced:
+
+### Removing duplicates
+
+```python
+unique = set(numbers)
+```
+
+### Checking membership
+
+```python
+if name in active:
+```
+
+### Finding common data
+
+```python
+a & b
+```
+
+### Finding missing data
+
+```python
+a - b
+```
+
+### Finding everything from two groups
+
+```python
+a | b
+```
+
+### Finding values appearing in exactly one group
+
+```python
+a ^ b
+```
+
+### Collecting unique results
+
+```python
+result = set()
+
+for item in data:
+    result.add(item)
+```
+
+### Detecting duplicates
+
+```python
+seen = []
+duplicates = []
+
+for item in data:
+    if item in seen:
+        duplicates.append(item)
+    else:
+        seen.append(item)
+```
+
+---
+
+# 14. Developer Rule of Thumb
+
+```text
+Need ordered, changeable data?
+→ List
+
+Need ordered, fixed data?
+→ Tuple
+
+Need unique values?
+→ Set
+
+Need fast/simple membership checking?
+→ Set
+
+Need common/different/group comparison?
+→ Set operations
+```
+
+Don't treat these as absolute rules. The correct data structure ultimately depends on the problem and the operations your program needs.
+
+---
+
+# Day 4 — Core Takeaway
+
+The important thing isn't memorizing every method.
+
+You should be able to look at a problem and think:
+
+```text
+What kind of data do I have?
+        ↓
+Does it need to change?
+        ↓
+Do duplicates matter?
+        ↓
+Do positions matter?
+        ↓
+Do I need membership checking?
+        ↓
+Do I need to compare groups?
+        ↓
+Choose the appropriate data structure
+```
+
+That decision-making process is more important for becoming a developer than memorizing syntax.
+
+# Day 4 — Quick Summary
+
+### Tuple
+
+```text
+Tuple → ordered + immutable + duplicates allowed
+```
+
+Use a tuple when data is **fixed and ordered**.
+
+```python
+student = ("Amit", 21, 85)
+```
+
+Important:
+
+* Indexing
+* Slicing
+* Unpacking
+* `count()`
+* `index()`
+* Single-element tuple → `(10,)`
+
+---
+
+### Set
+
+```text
+Set → unique + mutable + no indexing
+```
+
+Use a set when you need:
+
+* Unique values
+* Membership checking
+* Comparing groups
+* Removing duplicates
+
+```python
+numbers = {10, 20, 30}
+```
+
+Empty set:
+
+```python
+set()
+```
+
+---
+
+### Set Operations
+
+```text
+a | b  → Union → everything
+a & b  → Intersection → common
+a - b  → Difference → only a
+a ^ b  → Symmetric difference → different
+```
+
+Methods:
+
+```text
+a.union(b)
+a.intersection(b)
+a.difference(b)
+a.symmetric_difference(b)
+```
+
+---
+
+### Set Methods
+
+```text
+add()       → add an element
+remove()    → remove; error if missing
+discard()   → remove; no error if missing
+```
+
+---
+
+### Membership
+
+```python
+x in my_set
+x not in my_set
+```
+
+---
+
+### Set Relationships
+
+```python
+a.issubset(b)
+a.issuperset(b)
+```
+
+```text
+issubset  → Is everything in A inside B?
+issuperset → Does A contain everything in B?
+```
+
+---
+
+### Comparison
+
+|            | List | Tuple | Set |
+| ---------- | ---- | ----- | --- |
+| Ordered    | ✅    | ✅     | ❌   |
+| Mutable    | ✅    | ❌     | ✅   |
+| Duplicates | ✅    | ✅     | ❌   |
+| Indexing   | ✅    | ✅     | ❌   |
+
+---
+
+### Most Important Mental Model
+
+```text
+List
+→ ordered collection
+
+Tuple
+→ ordered, fixed collection
+
+Set
+→ unique collection
+```
+
+### Day 4 Developer Takeaway
+
+Don't choose a data structure just because you know its syntax.
+
+Ask:
+
+```text
+Do I need order?
+Do I need to modify it?
+Do duplicates matter?
+Do I need membership checking?
+Do I need to compare groups?
+```
+
+Then choose:
+
+```text
+Ordered + changeable → List
+Ordered + fixed      → Tuple
+Unique / comparison   → Set
+```
+
+
+
+
+
+
+
+
+
+
+
