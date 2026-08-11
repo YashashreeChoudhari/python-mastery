@@ -2267,13 +2267,796 @@ Ordered + fixed      → Tuple
 Unique / comparison   → Set
 ```
 
+# Day 5 — Dictionaries
 
+## 1. What is a Dictionary?
 
+A **dictionary** stores data as **key-value pairs**.
 
+```python
+student = {
+    "name": "Amit",
+    "age": 21,
+    "marks": 85
+}
+```
 
+Mental model:
 
+```text
+List
+index → value
 
+Dictionary
+key → value
+```
 
+A dictionary is:
 
+* Mutable
+* Accessed using keys
+* Stores key-value pairs
+* Keys must be unique
+
+---
+
+# 2. Creating a Dictionary
+
+```python
+student = {
+    "name": "Amit",
+    "age": 21,
+    "marks": 85
+}
+```
+
+### Empty dictionary
+
+```python
+student = {}
+```
+
+or:
+
+```python
+student = dict()
+```
+
+---
+
+# 3. Accessing Values
+
+Use the key:
+
+```python
+print(student["name"])
+print(student["marks"])
+```
+
+Output:
+
+```text
+Amit
+85
+```
+
+Unlike a list, a dictionary is not accessed using numeric indexes.
+
+```python
+student[0]       # ❌
+student["name"]  # ✅
+```
+
+---
+
+# 4. Adding a New Key
+
+If the key doesn't already exist, assignment adds it.
+
+```python
+student["course"] = "Python"
+```
+
+Now the dictionary contains:
+
+```text
+name   → Amit
+age    → 21
+marks  → 85
+course → Python
+```
+
+---
+
+# 5. Updating a Value
+
+If the key already exists, assignment changes its value.
+
+```python
+student["marks"] = 90
+```
+
+Before:
+
+```text
+marks → 85
+```
+
+After:
+
+```text
+marks → 90
+```
+
+The same syntax is used for both:
+
+```text
+New key       → adds data
+Existing key  → updates data
+```
+
+---
+
+# 6. Dictionary Membership
+
+The `in` operator checks whether a **key** exists.
+
+```python
+if "marks" in student:
+    print("Marks available")
+```
+
+### Important
+
+```python
+"Amit" in student
+```
+
+checks whether `"Amit"` is a **key**.
+
+It does NOT search through the values.
+
+To check values:
+
+```python
+"Amit" in student.values()
+```
+
+---
+
+# 7. Removing Data
+
+## `pop()`
+
+Removes a specific key-value pair.
+
+```python
+student.pop("age")
+```
+
+It can also return the removed value:
+
+```python
+age = student.pop("age")
+```
+
+---
+
+## `del`
+
+Removes a specific key-value pair.
+
+```python
+del student["marks"]
+```
+
+---
+
+## `clear()`
+
+Removes everything from the dictionary.
+
+```python
+student.clear()
+
+print(student)
+```
+
+Output:
+
+```text
+{}
+```
+
+### Mental model
+
+```text
+pop()   → remove one key + can return its value
+del     → delete one key
+clear() → empty the dictionary
+```
+
+---
+
+# 8. Dictionary Views
+
+Python provides three useful ways to access dictionary data:
+
+```text
+.keys()   → keys
+.values() → values
+.items()  → key + value
+```
+
+Example:
+
+```python
+student = {
+    "name": "Amit",
+    "age": 21,
+    "marks": 85
+}
+
+print(student.keys())
+print(student.values())
+print(student.items())
+```
+
+---
+
+# 9. Looping Through a Dictionary
+
+## Keys
+
+When looping directly over a dictionary, you get its keys.
+
+```python
+for key in student:
+    print(key)
+```
+
+You can also write:
+
+```python
+for key in student.keys():
+    print(key)
+```
+
+---
+
+## Values
+
+```python
+for value in student.values():
+    print(value)
+```
+
+---
+
+## Keys + Values
+
+Use `.items()`:
+
+```python
+for key, value in student.items():
+    print(f"{key} -> {value}")
+```
+
+`.items()` gives key-value pairs that can be unpacked into two variables.
+
+Example:
+
+```text
+("name", "Amit")
+("age", 21)
+("marks", 85)
+```
+
+---
+
+# 10. `.get()` — Safe Dictionary Access
+
+Direct access:
+
+```python
+employee["age"]
+```
+
+If `"age"` doesn't exist, Python raises a `KeyError`.
+
+Using `.get()`:
+
+```python
+employee.get("age")
+```
+
+If `"age"` doesn't exist, it returns:
+
+```text
+None
+```
+
+You can also provide a default value:
+
+```python
+employee.get("age", 0)
+```
+
+Result:
+
+```text
+0
+```
+
+### Mental model
+
+```text
+dict["key"]
+→ Error if key is missing
+
+dict.get("key")
+→ None if key is missing
+
+dict.get("key", default)
+→ default if key is missing
+```
+
+Use `dict["key"]` when the key is expected to exist.
+
+Use `.get()` when the key may be missing.
+
+---
+
+# 11. Dictionary Filtering
+
+Dictionaries can be processed using loops and conditions.
+
+Example:
+
+```python
+scores = {
+    "Amit": 85,
+    "Rahul": 72,
+    "Priya": 91,
+    "Neha": 68
+}
+
+for name, marks in scores.items():
+    if marks >= 80:
+        print(name, marks)
+```
+
+Output:
+
+```text
+Amit 85
+Priya 91
+```
+
+Pattern:
+
+```text
+dictionary
+    ↓
+.items()
+    ↓
+key + value
+    ↓
+condition
+    ↓
+filtered result
+```
+
+---
+
+# 12. Building a Dictionary from Lists
+
+Suppose:
+
+```python
+names = ["Amit", "Rahul", "Priya"]
+marks = [85, 72, 91]
+```
+
+We can create:
+
+```text
+Amit  → 85
+Rahul → 72
+Priya → 91
+```
+
+Using indexes:
+
+```python
+scores = {}
+
+for i in range(len(names)):
+    scores[names[i]] = marks[i]
+
+print(scores)
+```
+
+Result:
+
+```python
+{
+    "Amit": 85,
+    "Rahul": 72,
+    "Priya": 91
+}
+```
+
+Later, this can be simplified using `zip()`:
+
+```python
+scores = {}
+
+for name, mark in zip(names, marks):
+    scores[name] = mark
+```
+
+---
+
+# 13. Dictionary + Counting
+
+One of the most important dictionary patterns is:
+
+```text
+value → frequency
+```
+
+Example:
+
+```python
+languages = [
+    "Python",
+    "Java",
+    "Python",
+    "C++",
+    "Java",
+    "Python"
+]
+```
+
+We want:
+
+```python
+{
+    "Python": 3,
+    "Java": 2,
+    "C++": 1
+}
+```
+
+Logic:
+
+```python
+freq = {}
+
+for language in languages:
+    if language in freq:
+        freq[language] += 1
+    else:
+        freq[language] = 1
+
+print(freq)
+```
+
+### Mental model
+
+```text
+See a value
+     ↓
+Already in dictionary?
+   /        \
+ Yes         No
+  ↓           ↓
++1 count    create = 1
+```
+
+This pattern is called **frequency counting**.
+
+---
+
+# 14. Dictionary + Grouping
+
+Sometimes one key needs to store **multiple values**.
+
+Example:
+
+```python
+developers = [
+    ("Amit", "Python"),
+    ("Rahul", "Java"),
+    ("Amit", "SQL"),
+    ("Rahul", "Git")
+]
+```
+
+We want:
+
+```python
+{
+    "Amit": ["Python", "SQL"],
+    "Rahul": ["Java", "Git"]
+}
+```
+
+Mental model:
+
+```text
+key → list of values
+```
+
+---
+
+# 15. `setdefault()`
+
+`setdefault()` is useful when grouping multiple values under one key.
+
+Syntax:
+
+```python
+dictionary.setdefault(key, default_value)
+```
+
+Example:
+
+```python
+skills = {}
+
+for name, skill in developers:
+    skills.setdefault(name, [])
+    skills[name].append(skill)
+
+print(skills)
+```
+
+Result:
+
+```python
+{
+    "Amit": ["Python", "SQL"],
+    "Rahul": ["Java", "Git"]
+}
+```
+
+### What does `setdefault()` do?
+
+```python
+skills.setdefault("Amit", [])
+```
+
+means:
+
+> If `"Amit"` doesn't exist, create it with `[]`.
+> If `"Amit"` already exists, keep its existing value.
+
+Then:
+
+```python
+skills[name].append(skill)
+```
+
+adds the new skill to the existing list.
+
+### Flow
+
+```text
+Amit → Python
+Amit → SQL
+        ↓
+Amit → [Python, SQL]
+
+Rahul → Java
+Rahul → Git
+        ↓
+Rahul → [Java, Git]
+```
+
+---
+
+# 16. Important Dictionary Patterns
+
+These are the main patterns learned today.
+
+### Key → Value
+
+```python
+scores = {
+    "Amit": 85,
+    "Rahul": 72
+}
+```
+
+### Value → Frequency
+
+```python
+freq = {
+    "Python": 3,
+    "Java": 2
+}
+```
+
+### Key → List of Values
+
+```python
+skills = {
+    "Amit": ["Python", "SQL"],
+    "Rahul": ["Java", "Git"]
+}
+```
+
+These patterns will appear repeatedly in problem solving.
+
+---
+
+# 17. Dictionary vs Other Data Structures
+
+| Feature    | List     | Tuple      | Set         | Dictionary                 |
+| ---------- | -------- | ---------- | ----------- | -------------------------- |
+| Ordered    | ✅        | ✅          | ❌           | Insertion order preserved* |
+| Mutable    | ✅        | ❌          | ✅           | ✅                          |
+| Duplicates | ✅        | ✅          | ❌           | Keys ❌ / Values ✅          |
+| Indexing   | ✅        | ✅          | ❌           | ❌                          |
+| Access     | Index    | Index      | Membership  | Key                        |
+| Main use   | Sequence | Fixed data | Unique data | Key → Value                |
+
+*Modern Python dictionaries preserve insertion order, but you should think of them primarily as **key-value mappings**, not as indexed sequences.
+
+---
+
+# 18. When to Use What?
+
+### List
+
+Use when you need:
+
+```text
+Ordered + changeable + duplicates allowed
+```
+
+Example:
+
+```python
+tasks = ["Study", "Practice", "Study"]
+```
+
+### Tuple
+
+Use when you need:
+
+```text
+Ordered + fixed data
+```
+
+Example:
+
+```python
+product = ("Laptop", 50000, 5)
+```
+
+### Set
+
+Use when you need:
+
+```text
+Unique values + membership + set operations
+```
+
+Example:
+
+```python
+active_users = {"Amit", "Rahul", "Priya"}
+```
+
+### Dictionary
+
+Use when you need:
+
+```text
+Key → Value relationship
+```
+
+Example:
+
+```python
+student_marks = {
+    "Amit": 85,
+    "Rahul": 72
+}
+```
+
+---
+
+# 19. Important Developer Mental Models
+
+### Access
+
+```text
+List       → index
+Tuple      → index
+Set        → membership
+Dictionary → key
+```
+
+### Processing
+
+```text
+dict.keys()   → work with keys
+dict.values() → work with values
+dict.items()  → work with both
+```
+
+### Missing keys
+
+```text
+dict["key"]       → KeyError if missing
+dict.get("key")   → None if missing
+```
+
+### Common patterns
+
+```text
+Counting:
+value → count
+
+Grouping:
+key → list of values
+
+Mapping:
+key → value
+```
+
+---
+
+# Day 5 Summary
+
+### Learned
+
+* Dictionary basics
+* Key-value pairs
+* Creating dictionaries
+* Accessing values
+* Adding keys
+* Updating values
+* Dictionary membership
+* `pop()`
+* `del`
+* `clear()`
+* `keys()`
+* `values()`
+* `items()`
+* Dictionary loops
+* `.get()`
+* Filtering dictionary data
+* Building dictionaries from lists
+* Frequency counting
+* Grouping data with `setdefault()`
+
+### Core patterns
+
+```text
+key → value
+value → frequency
+key → list of values
+```
+
+### Most important mental model
+
+```text
+List
+→ ordered collection
+
+Tuple
+→ ordered, fixed collection
+
+Set
+→ unique collection
+
+Dictionary
+→ key-value relationship
+```
 
 
