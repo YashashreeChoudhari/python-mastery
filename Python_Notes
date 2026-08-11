@@ -1,3 +1,7 @@
+# Python Learning Notes
+
+> Day-by-day notes covering Python fundamentals, control flow, lists, tuples, sets, and dictionaries.
+
 # Day 1 – Python Fundamentals
 
 ## 1. Python Introduction
@@ -208,20 +212,6 @@ Benefits:
 - Prevents unnecessary evaluations and some runtime errors
 
 ---
-
-# Day 1 Summary
-
-- Python is high-level and general-purpose.
-- Python compiles to bytecode, then the PVM executes it.
-- Variables are references to objects.
-- Every object has a value, type, and behavior.
-- Objects are either mutable or immutable.
-- Python uses dynamic typing.
-- Type conversion can be implicit or explicit.
-- Methods belong to objects.
-- Expressions evaluate to values.
-- Conditional statements control program flow.
-- Short-circuit evaluation improves efficiency and safety.
 
 # Day 2 — Conditions, Loops & Lists
 
@@ -1053,55 +1043,6 @@ if x % 2 != 0         → filter
 
 ---
 
-# Day 2 — Key Takeaways
-
-```text
-Ternary:
-A if condition else B
-
-for:
-for x in iterable:
-
-while:
-while condition:
-
-Loop control:
-break → stop
-continue → skip
-pass → do nothing
-
-List:
-ordered + mutable + allows duplicates
-
-Indexing:
-a[0]
-a[-1]
-
-Slicing:
-a[start:stop:step]
-
-Important methods:
-append()
-insert()
-remove()
-pop()
-extend()
-count()
-index()
-sort()
-reverse()
-clear()
-
-References:
-b = a          → same object
-b = a.copy()   → separate list
-
-Comprehension:
-[expression for variable in iterable]
-```
-
-
-
 # Day 3 — `enumerate()` and `zip()`
 
 ## 1. `enumerate()`
@@ -1282,10 +1223,6 @@ enumerate() → I need the position + value.
 
 zip()       → I need corresponding values from multiple sequences.
 ```
-
-
-
-
 
 # Day 4 — Tuples + Sets
 
@@ -2094,179 +2031,6 @@ Don't treat these as absolute rules. The correct data structure ultimately depen
 
 ---
 
-# Day 4 — Core Takeaway
-
-The important thing isn't memorizing every method.
-
-You should be able to look at a problem and think:
-
-```text
-What kind of data do I have?
-        ↓
-Does it need to change?
-        ↓
-Do duplicates matter?
-        ↓
-Do positions matter?
-        ↓
-Do I need membership checking?
-        ↓
-Do I need to compare groups?
-        ↓
-Choose the appropriate data structure
-```
-
-That decision-making process is more important for becoming a developer than memorizing syntax.
-
-# Day 4 — Quick Summary
-
-### Tuple
-
-```text
-Tuple → ordered + immutable + duplicates allowed
-```
-
-Use a tuple when data is **fixed and ordered**.
-
-```python
-student = ("Amit", 21, 85)
-```
-
-Important:
-
-* Indexing
-* Slicing
-* Unpacking
-* `count()`
-* `index()`
-* Single-element tuple → `(10,)`
-
----
-
-### Set
-
-```text
-Set → unique + mutable + no indexing
-```
-
-Use a set when you need:
-
-* Unique values
-* Membership checking
-* Comparing groups
-* Removing duplicates
-
-```python
-numbers = {10, 20, 30}
-```
-
-Empty set:
-
-```python
-set()
-```
-
----
-
-### Set Operations
-
-```text
-a | b  → Union → everything
-a & b  → Intersection → common
-a - b  → Difference → only a
-a ^ b  → Symmetric difference → different
-```
-
-Methods:
-
-```text
-a.union(b)
-a.intersection(b)
-a.difference(b)
-a.symmetric_difference(b)
-```
-
----
-
-### Set Methods
-
-```text
-add()       → add an element
-remove()    → remove; error if missing
-discard()   → remove; no error if missing
-```
-
----
-
-### Membership
-
-```python
-x in my_set
-x not in my_set
-```
-
----
-
-### Set Relationships
-
-```python
-a.issubset(b)
-a.issuperset(b)
-```
-
-```text
-issubset  → Is everything in A inside B?
-issuperset → Does A contain everything in B?
-```
-
----
-
-### Comparison
-
-|            | List | Tuple | Set |
-| ---------- | ---- | ----- | --- |
-| Ordered    | ✅    | ✅     | ❌   |
-| Mutable    | ✅    | ❌     | ✅   |
-| Duplicates | ✅    | ✅     | ❌   |
-| Indexing   | ✅    | ✅     | ❌   |
-
----
-
-### Most Important Mental Model
-
-```text
-List
-→ ordered collection
-
-Tuple
-→ ordered, fixed collection
-
-Set
-→ unique collection
-```
-
-### Day 4 Developer Takeaway
-
-Don't choose a data structure just because you know its syntax.
-
-Ask:
-
-```text
-Do I need order?
-Do I need to modify it?
-Do duplicates matter?
-Do I need membership checking?
-Do I need to compare groups?
-```
-
-Then choose:
-
-```text
-Ordered + changeable → List
-Ordered + fixed      → Tuple
-Unique / comparison   → Set
-```
-
 # Day 5 — Dictionaries
 
 ## 1. What is a Dictionary?
@@ -3010,53 +2774,3 @@ key → value
 ```
 
 ---
-
-# Day 5 Summary
-
-### Learned
-
-* Dictionary basics
-* Key-value pairs
-* Creating dictionaries
-* Accessing values
-* Adding keys
-* Updating values
-* Dictionary membership
-* `pop()`
-* `del`
-* `clear()`
-* `keys()`
-* `values()`
-* `items()`
-* Dictionary loops
-* `.get()`
-* Filtering dictionary data
-* Building dictionaries from lists
-* Frequency counting
-* Grouping data with `setdefault()`
-
-### Core patterns
-
-```text
-key → value
-value → frequency
-key → list of values
-```
-
-### Most important mental model
-
-```text
-List
-→ ordered collection
-
-Tuple
-→ ordered, fixed collection
-
-Set
-→ unique collection
-
-Dictionary
-→ key-value relationship
-```
-
-
