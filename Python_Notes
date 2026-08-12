@@ -2774,3 +2774,215 @@ key → value
 ```
 
 ---
+
+# Day 6 — Nested Dictionaries
+
+## 1. What is a Nested Dictionary?
+
+A **nested dictionary** is a dictionary that contains another dictionary as a value.
+
+### Example
+
+```python
+students = {
+    "Amit": {
+        "age": 21,
+        "marks": 85,
+        "course": "Python"
+    },
+    "Rahul": {
+        "age": 22,
+        "marks": 78,
+        "course": "Java"
+    }
+}
+```
+
+---
+
+## 2. Accessing Nested Data
+
+### Access the complete inner dictionary
+
+```python
+print(students["Amit"])
+```
+
+**Output:**
+
+```text
+{'age': 21, 'marks': 85, 'course': 'Python'}
+```
+
+### Access a specific value
+
+```python
+print(students["Amit"]["marks"])
+```
+
+**Output:**
+
+```text
+85
+```
+
+---
+
+## 3. Updating Nested Data
+
+We can update a value inside the nested dictionary.
+
+```python
+students["Amit"]["marks"] = 90
+```
+
+Now Amit's marks become `90`.
+
+---
+
+## 4. Adding a Nested Key
+
+We can add a new key-value pair inside an inner dictionary.
+
+```python
+students["Amit"]["city"] = "Pune"
+```
+
+Now `"city"` is added inside Amit's dictionary.
+
+---
+
+# 5. Looping Through a Nested Dictionary
+
+Consider this example:
+
+```python
+employees = {
+    "Amit": {
+        "role": "Backend",
+        "salary": 75000
+    },
+    "Rahul": {
+        "role": "Frontend",
+        "salary": 65000
+    }
+}
+```
+
+## Step 1 — Outer Loop
+
+The outer dictionary gives us the employee name and their inner dictionary.
+
+```python
+for name, details in employees.items():
+    print(name)
+    print(details)
+```
+
+**Output:**
+
+```text
+Amit
+{'role': 'Backend', 'salary': 75000}
+
+Rahul
+{'role': 'Frontend', 'salary': 65000}
+```
+
+---
+
+## Step 2 — Access Values Inside the Inner Dictionary
+
+We can directly access values from the inner dictionary.
+
+```python
+for name, details in employees.items():
+    print(name, details["role"], details["salary"])
+```
+
+**Output:**
+
+```text
+Amit Backend 75000
+Rahul Frontend 65000
+```
+
+---
+
+## Step 3 — Nested Loop
+
+If you want to process every key-value pair inside each employee's dictionary:
+
+```python
+for name, details in employees.items():
+    print(name)
+
+    for key, value in details.items():
+        print(key, value)
+```
+
+**Output:**
+
+```text
+Amit
+role Backend
+salary 75000
+
+Rahul
+role Frontend
+salary 65000
+```
+
+---
+
+# 6. Mental Model
+
+Think of a nested dictionary like this:
+
+```text
+employees
+    ↓
+name + details
+    ↓
+details
+    ↓
+key + value
+```
+
+Or visually:
+
+```text
+employees
+├── Amit
+│   ├── role → Backend
+│   └── salary → 75000
+│
+└── Rahul
+    ├── role → Frontend
+    └── salary → 65000
+```
+
+### Key idea
+
+```python
+employees.items()
+```
+
+gives:
+
+```text
+name + details
+```
+
+Then:
+
+```python
+details.items()
+```
+
+gives:
+
+```text
+key + value
+```
+
