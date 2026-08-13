@@ -2986,3 +2986,105 @@ gives:
 key + value
 ```
 
+# Day 7 — Functions
+
+## What is a Function?
+A function is a reusable block of code that performs a specific task. By using functions, you avoid repeating the same code multiple times and make your programs much easier to read and maintain.
+
+**Syntax:**
+```python
+def function_name(parameters):
+    # code block
+    return result
+```
+
+---
+
+## Parameters vs. Arguments
+
+While often used interchangeably in casual conversation, there is a strict difference in programming:
+
+*   **Parameter:** The variable written when *defining* the function.
+*   **Argument:** The actual value you provide when *calling* the function.
+
+```python
+# 'name' is the parameter
+def greet(name):
+    print("Hello", name)
+
+# "Amit" is the argument
+greet("Amit")
+```
+
+> **Think of it like this:**
+> Parameter → Placeholder
+> Argument → Actual value
+
+---
+
+## The Big Difference: `return` vs `print()`
+
+This distinction is very important when building logic. 
+
+**With `print()`:**
+```python
+def square(number):
+    print(number * number)
+
+result = square(5)
+print(result) 
+# Output: 25 (from the function) followed by None (because nothing was sent back to 'result')
+```
+
+**With `return`:**
+```python
+def square(number):
+    return number * number
+
+result = square(5)
+print(result) 
+# Output: 25 (the value was successfully stored in the 'result' variable)
+```
+
+> **Rule to remember:**
+> *   `print()` → Displays something to the screen (for the human).
+> *   `return` → Sends a value back to the caller (for the computer to use later).
+
+---
+
+## *Added Concept:* Default Parameters
+You can give a parameter a default value so the function still works even if the user forgets to pass an argument.
+
+```python
+def greet(name="Guest"):
+    print("Hello", name)
+
+greet("Amit")  # Outputs: Hello Amit
+greet()        # Outputs: Hello Guest
+```
+
+## *Added Concept:* Using Functions with Lists and Dictionaries
+Since we are connecting functions to past topics, here is how you can pass a list into a function:
+
+```python
+def get_even_numbers(numbers_list):
+    even_nums = []
+    for num in numbers_list:
+        if num % 2 == 0:
+            even_nums.append(num)
+    return even_nums
+
+my_list = [1, 2, 3, 4, 5, 6]
+print(get_even_numbers(my_list)) 
+# Output: [2, 4, 6]
+```
+
+---
+
+## Summary
+
+*   **Functions** are reusable blocks of code defined using the `def` keyword.
+*   **Parameters** are the placeholders in the function definition, while **arguments** are the real data passed into them.
+*   Use `return` when you want a function to produce a usable value for other parts of your code; use `print()` only when you need to display text to the screen.
+*   You can set **default parameters** to make arguments optional.
+*   Functions can accept any data type as an argument, including **lists, dictionaries, and sets**, making them powerful tools for processing data.
