@@ -3088,3 +3088,545 @@ print(get_even_numbers(my_list))
 *   Use `return` when you want a function to produce a usable value for other parts of your code; use `print()` only when you need to display text to the screen.
 *   You can set **default parameters** to make arguments optional.
 *   Functions can accept any data type as an argument, including **lists, dictionaries, and sets**, making them powerful tools for processing data.
+
+
+# Day 11 — Modules & Packages
+
+---
+
+## 1. What is a Module?
+
+A **module** is simply a Python file (`.py`) containing code that you can reuse.
+
+For example:
+
+```text
+math_utils.py
+```
+
+Inside `math_utils.py`:
+
+```python
+def add(a, b):
+    return a + b
+
+def multiply(a, b):
+    return a * b
+```
+
+Another Python file can import and use these functions.
+
+### Think of it like:
+
+```text
+math_utils.py
+     ↓
+   import
+     ↓
+your program
+     ↓
+math_utils.add()
+math_utils.multiply()
+```
+
+---
+
+## 2. Why Do We Use Modules?
+
+Imagine putting **500 functions into one Python file**.
+
+That becomes difficult to:
+
+* Read
+* Maintain
+* Debug
+* Reuse
+
+Instead, we can organize our code into separate files:
+
+```text
+project/
+│
+├── main.py
+├── math_utils.py
+├── employee_utils.py
+└── file_utils.py
+```
+
+Each module can have a **specific responsibility**.
+
+This is an important step toward writing real-world Python projects.
+
+---
+
+# 3. `import`
+
+You can import an entire module:
+
+```python
+import math_utils
+```
+
+Then access its functions using:
+
+```python
+math_utils.add(10, 5)
+```
+
+Output:
+
+```text
+15
+```
+
+And:
+
+```python
+math_utils.multiply(10, 5)
+```
+
+Output:
+
+```text
+50
+```
+
+### Important Pattern
+
+```python
+module_name.function_name()
+```
+
+Example:
+
+```python
+math_utils.add()
+```
+
+---
+
+# 4. `from ... import ...`
+
+Instead of importing the entire module:
+
+```python
+import math_utils
+```
+
+you can import a specific function:
+
+```python
+from math_utils import add
+```
+
+Now you can directly use:
+
+```python
+add(10, 5)
+```
+
+instead of:
+
+```python
+math_utils.add(10, 5)
+```
+
+### Difference
+
+```python
+import math_utils
+```
+
+→ Imports the module.
+
+```python
+from math_utils import add
+```
+
+→ Imports `add` directly from the module.
+
+---
+
+# 5. Import Multiple Functions
+
+You can import multiple functions from the same module:
+
+```python
+from math_utils import add, multiply
+```
+
+Now:
+
+```python
+print(add(10, 5))
+print(multiply(10, 5))
+```
+
+Output:
+
+```text
+15
+50
+```
+
+---
+
+# 6. Aliases with `as`
+
+Sometimes a module name is long.
+
+You can give it a shorter name using `as`:
+
+```python
+import math_utils as mu
+```
+
+Now:
+
+```python
+print(mu.add(10, 5))
+```
+
+Here:
+
+```text
+math_utils → original module name
+mu         → alias
+```
+
+Another example:
+
+```python
+import calculator as calc
+
+print(calc.add(10, 5))
+```
+
+Here:
+
+```text
+calculator → original module name
+calc       → alias
+```
+
+---
+
+# 7. Built-in Modules
+
+Python already provides many useful modules.
+
+You don't always have to create a module yourself.
+
+## `math`
+
+```python
+import math
+```
+
+### `sqrt()`
+
+```python
+print(math.sqrt(25))
+```
+
+Output:
+
+```text
+5.0
+```
+
+### `ceil()`
+
+Rounds **up**:
+
+```python
+print(math.ceil(4.2))
+```
+
+Output:
+
+```text
+5
+```
+
+### `floor()`
+
+Rounds **down**:
+
+```python
+print(math.floor(4.9))
+```
+
+Output:
+
+```text
+4
+```
+
+---
+
+## `random`
+
+The `random` module is useful for generating random values.
+
+```python
+import random
+
+print(random.randint(1, 10))
+```
+
+This generates a random integer between **1 and 10**, inclusive.
+
+For example, it could produce:
+
+```text
+7
+```
+
+or:
+
+```text
+2
+```
+
+or:
+
+```text
+10
+```
+
+The exact value changes because it is random.
+
+---
+
+## `datetime`
+
+The `datetime` module works with dates and times.
+
+Example:
+
+```python
+from datetime import date
+
+today = date.today()
+
+print(today)
+```
+
+---
+
+# 8. What is a Package?
+
+A **package** is a folder that contains related Python modules.
+
+### Module
+
+Usually one `.py` file:
+
+```text
+calculator.py
+```
+
+### Package
+
+A folder containing related modules:
+
+```text
+utilities/
+│
+├── __init__.py
+├── calculator.py
+└── employee.py
+```
+
+### Think of it as:
+
+```text
+Module  → one Python file
+Package → collection of related modules
+```
+
+---
+
+# 9. Example Project Structure
+
+A project might look like:
+
+```text
+my_project/
+│
+├── main.py
+│
+└── utilities/
+    ├── __init__.py
+    ├── calculator.py
+    └── employee.py
+```
+
+Here:
+
+```text
+my_project/
+    ↓
+project
+
+utilities/
+    ↓
+package
+
+calculator.py
+    ↓
+module
+
+add()
+    ↓
+function
+```
+
+---
+
+# 10. Importing from a Package
+
+Suppose:
+
+```text
+utilities/
+└── calculator.py
+```
+
+and `calculator.py` contains:
+
+```python
+def add(a, b):
+    return a + b
+```
+
+You can import `add` using:
+
+```python
+from utilities.calculator import add
+```
+
+Then:
+
+```python
+print(add(10, 20))
+```
+
+Output:
+
+```text
+30
+```
+
+### Read it from left to right:
+
+```text
+utilities
+    ↓
+package
+
+calculator
+    ↓
+module
+
+add
+    ↓
+function
+```
+
+---
+
+# 11. Module vs Package
+
+| Module                        | Package                           |
+| ----------------------------- | --------------------------------- |
+| Usually one `.py` file        | Folder containing related modules |
+| Contains Python code          | Organizes multiple modules        |
+| Example: `calculator.py`      | Example: `utilities/`             |
+| Can contain functions/classes | Can contain multiple modules      |
+
+### Easy way to remember
+
+> **Module = file**
+> **Package = folder of modules**
+
+---
+
+# 12. Important Import Patterns
+
+### Import entire module
+
+```python
+import calculator
+
+calculator.add(10, 5)
+```
+
+### Import specific function
+
+```python
+from calculator import add
+
+add(10, 5)
+```
+
+### Import multiple functions
+
+```python
+from calculator import add, multiply
+```
+
+### Import with alias
+
+```python
+import calculator as calc
+
+calc.add(10, 5)
+```
+
+### Import from a package
+
+```python
+from utilities.calculator import add
+```
+
+---
+
+# 📝 Day 11 Summary
+
+### Modules
+
+* A module is a reusable `.py` file.
+* Modules help organize and reuse code.
+* `import` imports a module.
+* `from ... import ...` imports specific items.
+* `as` creates an alias.
+
+### Built-in Modules
+
+Important examples:
+
+```text
+math
+random
+datetime
+```
+
+### Packages
+
+* A package organizes related modules.
+* A module is generally a **file**.
+* A package is generally a **folder** containing modules.
+* `__init__.py` is traditionally used to mark a package.
+
+### Core mental model
+
+```text
+Package
+   ↓
+Module
+   ↓
+Function / Class
+```
+
