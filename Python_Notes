@@ -3630,3 +3630,288 @@ Module
 Function / Class
 ```
 
+
+# Day 12 — Pythonic Data Processing
+
+## 1. List Comprehension
+
+Used to create lists in a compact way.
+
+```python
+numbers = [1, 2, 3, 4, 5]
+
+squares = [n * n for n in numbers]
+
+print(squares)
+# [1, 4, 9, 16, 25]
+```
+
+### With condition
+
+```python
+even = [n for n in numbers if n % 2 == 0]
+
+print(even)
+# [2, 4]
+```
+
+**Pattern:**
+
+```python
+[expression for item in iterable if condition]
+```
+
+---
+
+## 2. Dictionary Comprehension
+
+Creates dictionaries in a compact way.
+
+```python
+numbers = [1, 2, 3, 4]
+
+squares = {n: n * n for n in numbers}
+
+print(squares)
+# {1: 1, 2: 4, 3: 9, 4: 16}
+```
+
+**Pattern:**
+
+```python
+{key: value for item in iterable}
+```
+
+---
+
+## 3. Set Comprehension
+
+Creates a set and automatically removes duplicates.
+
+```python
+numbers = [1, 2, 2, 3, 3, 4]
+
+result = {n for n in numbers}
+
+print(result)
+# {1, 2, 3, 4}
+```
+
+**Pattern:**
+
+```python
+{expression for item in iterable}
+```
+
+---
+
+# 4. `lambda`
+
+A short, anonymous function.
+
+### Normal function
+
+```python
+def square(x):
+    return x * x
+```
+
+### Lambda
+
+```python
+square = lambda x: x * x
+```
+
+**Pattern:**
+
+```python
+lambda arguments: expression
+```
+
+Example:
+
+```python
+lambda x: x * 2
+lambda x: x % 2 == 0
+lambda x: len(x)
+```
+
+---
+
+# 5. `map()`
+
+Used to **transform every item**.
+
+```python
+numbers = [1, 2, 3, 4, 5]
+
+result = list(map(lambda x: x * 2, numbers))
+
+print(result)
+# [2, 4, 6, 8, 10]
+```
+
+**Pattern:**
+
+```python
+map(function, iterable)
+```
+
+### Remember
+
+```text
+lambda → what to do to ONE item
+map()  → apply it to EVERY item
+list() → convert result to a list
+```
+
+Example:
+
+```python
+names = ["alice", "bob", "charlie"]
+
+result = list(map(lambda x: x.upper(), names))
+
+# ['ALICE', 'BOB', 'CHARLIE']
+```
+
+---
+
+# 6. `filter()`
+
+Used to **select items** based on a condition.
+
+```python
+numbers = [1, 2, 3, 4, 5, 6]
+
+result = list(filter(lambda x: x % 2 == 0, numbers))
+
+print(result)
+# [2, 4, 6]
+```
+
+**Pattern:**
+
+```python
+filter(condition, iterable)
+```
+
+### Remember
+
+```text
+map()    → transform
+filter() → select
+```
+
+Example:
+
+```python
+numbers = [4, 7, 10, 13, 16, 19, 22]
+
+result = list(
+    filter(lambda x: x % 2 == 0 and x > 10, numbers)
+)
+
+# [16, 22]
+```
+
+---
+
+# 7. `sorted(key=...)`
+
+Used to **sort items according to a specific property**.
+
+Normal sorting:
+
+```python
+numbers = [40, 10, 30, 20]
+
+print(sorted(numbers))
+# [10, 20, 30, 40]
+```
+
+### Sorting by a key
+
+```python
+words = ["apple", "fig", "banana", "kiwi"]
+
+result = sorted(words, key=lambda x: len(x))
+
+print(result)
+# ['fig', 'kiwi', 'apple', 'banana']
+```
+
+Python calculates:
+
+```text
+apple   → 5
+fig     → 3
+banana  → 6
+kiwi    → 4
+```
+
+Then sorts using those values.
+
+**Pattern:**
+
+```python
+sorted(iterable, key=lambda x: property)
+```
+
+---
+
+# Quick Cheat Sheet
+
+| Tool                     | Purpose                   |
+| ------------------------ | ------------------------- |
+| List comprehension       | Create a list             |
+| Dictionary comprehension | Create a dictionary       |
+| Set comprehension        | Create a set              |
+| `lambda`                 | Define a small function   |
+| `map()`                  | Transform every item      |
+| `filter()`               | Select matching items     |
+| `sorted()`               | Sort items                |
+| `sorted(key=...)`        | Sort by a custom property |
+
+### The most important distinction
+
+```text
+lambda  → defines the operation
+map()   → transforms items
+filter()→ selects items
+sorted()→ orders items
+```
+
+### Combination
+
+You can combine them:
+
+```python
+numbers = [1, 2, 3, 4, 5, 6]
+
+result = list(
+    map(
+        lambda x: x * x,
+        filter(lambda x: x % 2 == 0, numbers)
+    )
+)
+
+print(result)
+# [4, 16, 36]
+```
+
+**Data flow:**
+
+```text
+numbers
+   ↓
+filter()
+   ↓
+even numbers
+   ↓
+map()
+   ↓
+squared numbers
+```
+
+This is the clean structure to keep in mind for the rest of Day 12.
